@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-minimal-black text-minimal-white p-4 mt-8">
       <div className="container mx-auto text-center">
-        <p>{footerData.content}</p>
+        <p dangerouslySetInnerHTML={{__html: footerData.content}}></p>
       </div>
     </footer>
   );

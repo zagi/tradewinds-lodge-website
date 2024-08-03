@@ -1,8 +1,10 @@
 export interface MenuItem {
   id: number;
-  targetId: string;
-  label: string;
-  componentType: string;
+  attributes: {
+    targetId: string;
+    label: string;
+    componentType: string;
+  }
 }
 
 export interface AboutData {
@@ -23,7 +25,15 @@ export interface HeroData {
   title: string;
   subtitle: string;
   backgroundImage?: {
-    url: string;
+    data: {
+      id: number,
+      attributes: {
+        name: string,
+        alternativeText: string,
+        url: string
+      }
+    }
+    
   };
 }
 

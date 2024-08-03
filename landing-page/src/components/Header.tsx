@@ -1,24 +1,21 @@
-// src/components/Header.tsx
 import React, { useEffect, useState } from 'react';
-import { fetchHeader, fetchMenu } from '../api';
+import { fetchHeader } from '../api';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { MenuItem } from '../types';
+import { MenuItem, HeaderData } from '../types';
 
 interface HeaderProps {
   onMenuClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => void;
+  menuItems: MenuItem[];
 }
 
-const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
-  const [headerData, setHeaderData] = useState<{ title: string; facebookUrl: string; instagramUrl: string }>({ title: '', facebookUrl: '', instagramUrl: '' });
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+const Header: React.FC<HeaderProps> = ({ onMenuClick, menuItems }) => {
+  const [headerData, setHeaderData] = useState<HeaderData>({ title: '', facebookUrl: '', instagramUrl: '' });
 
   useEffect(() => {
     const fetchData = async () => {
       const headerResponse = await fetchHeader();
-      const menu = await fetchMenu();
       setHeaderData(headerResponse);
-      setMenuItems(menu);
     };
     fetchData();
   }, []);
@@ -31,8 +28,8 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
           <ul className="inline-flex space-x-4 text-minimal-white">
             {menuItems.map(item => (
               <li key={item.id}>
-                <a href={item.targetId} className="hover:text-minimal-gray" onClick={(e) => onMenuClick(e, item.targetId)}>
-                  {item.label}
+                <a href={`#${item.attributes.targetId}`} className="hover:text-minimal-gray" onClick={(e) => onMenuClick(e, item.attributes.targetId)}>
+                  {item.attributes.label}
                 </a>
               </li>
             ))}

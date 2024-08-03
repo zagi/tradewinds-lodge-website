@@ -3,11 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 interface ScrollToTopButtonProps {
-  showScrollTop: boolean;
-  scrollToTop: () => void;
-}
-
-const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({ showScrollTop, scrollToTop }) => {
+    showScrollTop: boolean;
+    scrollToTop: () => void;
+  }
+  
+  const ScrollToTopButton: React.FC<ScrollToTopButtonProps> = ({ showScrollTop, scrollToTop }) => {
+    if (!showScrollTop) {
+      return null;
+    }
   return (
     showScrollTop && (
       <button

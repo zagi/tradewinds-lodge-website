@@ -56,7 +56,7 @@ const App: React.FC = () => {
   const handleMenuClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
     event.preventDefault();
     const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-    const targetElement = document.querySelector(targetId) as HTMLElement;
+    const targetElement = document.querySelector(`#${targetId}`) as HTMLElement;
     const targetPosition = targetElement?.offsetTop - headerHeight || 0;
 
     window.scrollTo({ top: targetPosition, behavior: 'smooth' });
@@ -83,11 +83,11 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Header onMenuClick={handleMenuClick} />
+      <Header onMenuClick={handleMenuClick} menuItems={menuItems} />
       <Hero onBookNowClick={handleBookNowClick} />
       {menuItems.map(item => (
-        <section key={item.id} id={item.targetId}>
-          {renderComponent(item.componentType)}
+        <section key={item.id} id={item.attributes.targetId}>
+          {renderComponent(item.attributes.componentType)}
         </section>
       ))}
       <Footer />

@@ -18,7 +18,7 @@ const Hero: React.FC<HeroProps> = ({ onBookNowClick }) => {
   }, []);
 
   return (
-    <section id="hero" className="relative h-screen bg-cover bg-center flex flex-col items-center justify-center text-center text-white" style={{ backgroundImage: `url(${heroData.backgroundImage?.url})` }}>
+    <section id="hero" className="relative h-screen bg-cover bg-center flex flex-col items-center justify-center text-center text-white" style={{ backgroundImage: `url(http://localhost:1337${heroData.backgroundImage?.data.attributes.url})` }}>
       <div className="absolute inset-0 bg-black opacity-30"></div>
       <div className="relative z-10">
         <p className="pre-title text-4xl mb-4">{heroData.preTitle}</p>

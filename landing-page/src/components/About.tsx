@@ -20,7 +20,7 @@ const About: React.FC<AboutProps> = ({ onBookNowClick }) => {
   return (
     <section id="about" className="container mx-auto my-16 p-4 flex flex-col md:flex-row items-center">
       <div className="md:w-1/2 ">
-        <img src={aboutData.image?.url} alt="About Us" className="w-full h-full object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg"/>
+        <img src={aboutData.image?.url} alt={aboutData.title} className="w-full h-full object-cover rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg"/>
       </div>
       <div className="md:w-1/2 md:ml-8">
         <p className="text-3xl text-minimal-black mb-4 pre-title text-right">{aboutData.preTitle}</p>
