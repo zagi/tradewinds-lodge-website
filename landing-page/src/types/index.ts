@@ -1,3 +1,12 @@
+export interface ImageChild {
+    id: number,
+    attributes: {
+      name: string,
+      alternativeText: string,
+      url: string
+    }
+}
+
 export interface MenuItem {
   id: number;
   attributes: {
@@ -10,10 +19,16 @@ export interface MenuItem {
 export interface AboutData {
   preTitle: string;
   title: string;
-  content: string;
+  content: {
+    type: string;
+    children: Array<{
+      type: string;
+      text: string;
+    }>;
+  }[];
   image?: {
-    url: string;
-  };
+    data: ImageChild
+  }
 }
 
 export interface FooterData {
@@ -25,29 +40,29 @@ export interface HeroData {
   title: string;
   subtitle: string;
   backgroundImage?: {
-    data: {
-      id: number,
-      attributes: {
-        name: string,
-        alternativeText: string,
-        url: string
-      }
-    }
-    
-  };
+    data: ImageChild
+  }
 }
 
 export interface Room {
-  title: string;
-  description: string;
-  amenities: string[];
-  images: string[];
+  id: number
+  attributes: {
+    title: string;
+    description: string;
+    amenities: string;
+    images: {
+      data: ImageChild[]
+    }
+  }
 }
 
 export interface Service {
-  icon: any;
-  title: string;
-  description: string;
+  id: number
+  attributes: {
+    icon: any;
+    title: string;
+    description: string;
+  }
 }
 
 export interface Testimonial {

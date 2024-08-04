@@ -21,9 +21,9 @@ const Services: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
         {services.map((service, index) => (
           <div key={index} className="p-10 bg-white shadow-md border border-gray-200 rounded-md transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-            <FontAwesomeIcon icon={service.icon} className="text-3xl text-minimal-black mb-4" />
-            <h3 className="text-xl font-semibold">{service.title}</h3>
-            <p className="mt-2">{service.description}</p>
+            <FontAwesomeIcon icon={['fas', service.attributes.icon]} className="text-3xl text-minimal-black mb-4" />
+            <h3 className="text-xl font-semibold">{service.attributes.title}</h3>
+            <p className="mt-2">{service.attributes.description}</p>
           </div>
         ))}
       </div>

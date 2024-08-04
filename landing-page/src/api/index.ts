@@ -34,7 +34,9 @@ export const fetchHero = async (): Promise<HeroData> => {
 };
 
 export const fetchAbout = async (): Promise<AboutData> => {
-  const response = (await strapi.find('about')) as StrapiResponse<{attributes:AboutData}>;
+  const response = (await strapi.find('about',{
+    populate: '*'
+  })) as StrapiResponse<{attributes:AboutData}>;
   return response.data.attributes;
 };
 
@@ -49,7 +51,9 @@ export const fetchMenu = async (): Promise<MenuItem[]> => {
 };
 
 export const fetchRooms = async (): Promise<Room[]> => {
-  const response = (await strapi.find('rooms')) as StrapiResponse<Room[]>;
+  const response = (await strapi.find('rooms',{
+    populate: '*'
+  })) as StrapiResponse<Room[]>;
   return response.data;
 };
 
@@ -85,6 +89,8 @@ export const fetchTestimonials = async (): Promise<Testimonial[]> => {
 };
 
 export const fetchGalleryImages = async (): Promise<any> => {
-  const response = (await strapi.find('gallery')) as StrapiResponse<any>;
+  const response = (await strapi.find('galleries',{
+    populate: '*'
+  })) as StrapiResponse<any>;
   return response.data;
 };

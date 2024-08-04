@@ -62,6 +62,7 @@ const App: React.FC = () => {
     window.scrollTo({ top: targetPosition, behavior: 'smooth' });
   };
 
+  // use ENUM for this instead of switch
   const renderComponent = (componentType: string) => {
     switch (componentType) {
       case 'about':

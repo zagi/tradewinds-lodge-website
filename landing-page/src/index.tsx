@@ -7,6 +7,11 @@ import reportWebVitals from './reportWebVitals';
 
 // dotenv.config();
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fas)
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
