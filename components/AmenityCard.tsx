@@ -1,6 +1,6 @@
-import React from 'react';
-import { Wifi, Coffee, Home, WavesLadder } from 'lucide-react';
-import { Amenity } from '@/types';
+import React from "react";
+import { Wifi, Coffee, Home, WavesLadder } from "lucide-react";
+import { Amenity } from "@/types";
 
 interface AmenityCardProps {
   amenity: Amenity;
@@ -22,7 +22,10 @@ const AmenityCard: React.FC<AmenityCardProps> = ({ amenity }) => {
       </div>
       <h3 className="text-lg font-semibold mb-2">{amenity.title}</h3>
       <p className="text-gray-600 dark:text-gray-100">{amenity.description}</p>
-      <div className="mt-4" dangerouslySetInnerHTML={{ __html: amenity.content }} />
+      <div
+        className="mt-4"
+        dangerouslySetInnerHTML={{ __html: amenity.content }}
+      />
     </div>
   );
 };

@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from 'react';
-import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from './ui/button';
+import React, { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "./ui/button";
 
 interface CarouselProps {
   images: string[];
@@ -20,7 +20,7 @@ const Carousel: React.FC<CarouselProps> = ({
   autoPlay = true,
   autoPlayInterval = 5000,
   className = "",
-  imageClassName = ""
+  imageClassName = "",
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -30,7 +30,9 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [images.length]);
 
   const goToPrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length,
+    );
   };
 
   // Auto-play functionality
@@ -105,7 +107,7 @@ const Carousel: React.FC<CarouselProps> = ({
           <button
             key={index}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex ? 'bg-white w-4' : 'bg-white/50'
+              index === currentIndex ? "bg-white w-4" : "bg-white/50"
             }`}
             onClick={() => setCurrentIndex(index)}
             aria-label={`Go to image ${index + 1}`}

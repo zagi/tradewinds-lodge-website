@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { Button } from './ui/button';
-import { Dialog, DialogContent } from './ui/dialog';
-import { GalleryImage as GalleryImageType } from '@/types';
+import React, { useState } from "react";
+import Image from "next/image";
+import { Button } from "./ui/button";
+import { Dialog, DialogContent } from "./ui/dialog";
+import { GalleryImage as GalleryImageType } from "@/types";
 
 interface GalleryImageProps {
   image: GalleryImageType;
@@ -14,7 +14,7 @@ const GalleryImage: React.FC<GalleryImageProps> = ({ image }) => {
   return (
     <>
       <div className="relative overflow-hidden rounded-lg aspect-square group">
-        <Image 
+        <Image
           src={image.src}
           alt={image.alt}
           fill
@@ -22,7 +22,7 @@ const GalleryImage: React.FC<GalleryImageProps> = ({ image }) => {
         />
         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Button 
+          <Button
             className="bg-white text-teal-600 hover:bg-gray-100"
             onClick={() => setIsOpen(true)}
           >
@@ -34,7 +34,7 @@ const GalleryImage: React.FC<GalleryImageProps> = ({ image }) => {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="max-w-4xl w-[90vw] h-[80vh] p-0 overflow-hidden">
           <div className="relative w-full h-full">
-            <Image 
+            <Image
               src={image.src}
               alt={image.alt}
               fill
