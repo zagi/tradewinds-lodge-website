@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MapPin, Bed, Bath, Warehouse, Star, ExternalLink } from "lucide-react";
+import { MapPin, Bed, Bath, Warehouse, Star, ExternalLink, Search } from "lucide-react";
 import { Room } from "@/types";
 import {
   Card,
@@ -54,6 +54,9 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
               View Details
             </Button>
           </div>
+          <div className="absolute bottom-3 right-3 md:hidden bg-white/80 text-teal-600 rounded-full p-2 z-20">
+          <Search onClick={() => setIsOpen(true)} className="h-4 w-4" />
+        </div>
         </div>
 
         <CardHeader className="p-4">

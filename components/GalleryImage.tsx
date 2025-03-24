@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent } from "./ui/dialog";
 import { GalleryImage as GalleryImageType } from "@/types";
+import { Search } from "lucide-react";
 
 interface GalleryImageProps {
   image: GalleryImageType;
@@ -28,6 +29,9 @@ const GalleryImage: React.FC<GalleryImageProps> = ({ image }) => {
           >
             View Larger
           </Button>
+        </div>
+        <div className="absolute bottom-3 right-3 md:hidden bg-white/80 text-teal-600 rounded-full p-2 z-20">
+          <Search onClick={() => setIsOpen(true)} className="h-4 w-4" />
         </div>
       </div>
 

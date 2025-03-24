@@ -84,7 +84,7 @@ const Carousel: React.FC<CarouselProps> = ({
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white/90 dark:hover:bg-gray-600 text-gray-800 rounded-full w-8 h-8 p-1.5 opacity-0 group-hover:opacity-100 transition-opacity z-10"
+        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/70 dark:bg-gray-800/70 hover:bg-white/90 dark:hover:bg-gray-700/90 text-gray-800 dark:text-gray-200 rounded-full w-8 h-8 p-1.5 opacity-70 md:opacity-0 md:group-hover:opacity-70 transition-opacity z-10"
         onClick={goToPrev}
         aria-label="Previous image"
       >
@@ -94,7 +94,7 @@ const Carousel: React.FC<CarouselProps> = ({
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white/90 dark:hover:bg-gray-600 text-gray-800 rounded-full w-8 h-8 p-1.5 opacity-0 group-hover:opacity-100 transition-opacity z-10"
+        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/70 dark:bg-gray-800/70 hover:bg-white/90 dark:hover:bg-gray-700/90 text-gray-800 dark:text-gray-200 rounded-full w-8 h-8 p-1.5 opacity-70 md:opacity-0 md:group-hover:opacity-70 transition-opacity z-10"
         onClick={goToNext}
         aria-label="Next image"
       >
