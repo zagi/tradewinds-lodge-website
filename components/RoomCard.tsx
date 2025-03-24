@@ -25,7 +25,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
 
   const handleBookingClick = () => {
     if (room.url) {
-      window.open(room.url, '_blank', 'noopener,noreferrer');
+      window.open(room.url, "_blank", "noopener,noreferrer");
     }
   };
 
@@ -192,7 +192,11 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
                   </div>
                 )}
                 {room.url && (
-                  <Button size="lg" onClick={handleBookingClick} className="flex gap-1 items-center">
+                  <Button
+                    size="lg"
+                    onClick={handleBookingClick}
+                    className="flex gap-1 items-center"
+                  >
                     Book a Viewing
                     <ExternalLink className="h-4 w-4 ml-1" />
                   </Button>
