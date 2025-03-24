@@ -44,12 +44,6 @@ const GalleryImage: React.FC<GalleryImageProps> = ({ image }) => {
               fill
               className="object-contain"
             />
-            <Button
-              className="absolute top-2 right-2 bg-white dark:bg-transparent text-gray-800 rounded-full w-8 h-8 p-0 flex items-center justify-center"
-              onClick={() => setIsOpen(false)}
-            >
-              ✕
-            </Button>
           </div>
         </DialogContent>
       </Dialog>

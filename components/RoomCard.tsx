@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { MapPin, Bed, Bath, Warehouse, Star, ExternalLink, Search } from "lucide-react";
+import {
+  MapPin,
+  Bed,
+  Bath,
+  Warehouse,
+  Star,
+  ExternalLink,
+  Search,
+} from "lucide-react";
 import { Room } from "@/types";
 import {
   Card,
@@ -55,8 +63,8 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
             </Button>
           </div>
           <div className="absolute bottom-3 right-3 md:hidden bg-white/80 text-teal-600 rounded-full p-2 z-20">
-          <Search onClick={() => setIsOpen(true)} className="h-4 w-4" />
-        </div>
+            <Search onClick={() => setIsOpen(true)} className="h-4 w-4" />
+          </div>
         </div>
 
         <CardHeader className="p-4">
@@ -117,11 +125,11 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
       </Card>
 
       {/* Room Details Dialog */}
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <Dialog open={isOpen} onOpenChange={setIsOpen} >
         <VisuallyHidden>
           <DialogTitle>Details</DialogTitle>
         </VisuallyHidden>
-        <DialogContent className="max-w-4xl p-0 overflow-hidden">
+        <DialogContent className="max-w-4xl p-0">
           <div className="grid md:grid-cols-2 h-full">
             {/* Carousel in Dialog - full height */}
             <div className="h-64 md:h-auto">
