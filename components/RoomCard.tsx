@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MapPin, Bed, Bath, Warehouse, Star } from "lucide-react";
+import { MapPin, Bed, Bath, Warehouse, Star, ExternalLink } from "lucide-react";
 import { Room } from "@/types";
 import {
   Card,
@@ -22,6 +22,12 @@ interface RoomCardProps {
 
 const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleBookingClick = () => {
+    if (room.url) {
+      window.open(room.url, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
     <>
@@ -67,7 +73,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
               </div>
             )) ?? (
               <div className="text-xs font-bold text-teal-600">
-                Ask for price
+                {/* Ask for price */}
               </div>
             )}
           </div>
@@ -182,10 +188,15 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
                   </div>
                 )) ?? (
                   <div className="text-xs font-bold text-teal-600">
-                    Ask for price
+                    {/* Ask for price */}
                   </div>
                 )}
-                <Button size="lg">Book a Viewing</Button>
+                {room.url && (
+                  <Button size="lg" onClick={handleBookingClick} className="flex gap-1 items-center">
+                    Book a Viewing
+                    <ExternalLink className="h-4 w-4 ml-1" />
+                  </Button>
+                )}
               </div>
             </div>
           </div>
