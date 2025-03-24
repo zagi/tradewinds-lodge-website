@@ -125,7 +125,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
       </Card>
 
       {/* Room Details Dialog */}
-      <Dialog open={isOpen} onOpenChange={setIsOpen} >
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <VisuallyHidden>
           <DialogTitle>Details</DialogTitle>
         </VisuallyHidden>

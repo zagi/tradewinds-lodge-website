@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ChevronUp, Home, Menu } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, Menu, Home, ChevronUp } from 'lucide-react';
+import { Dialog, DialogContent } from './ui/dialog';
+import Image from 'next/image';
 import RoomCard from "./RoomCard";
 import AmenityCard from "./AmenityCard";
-import GalleryImage from "./GalleryImage";
 import TestimonialCard from "./TestimonialCard";
 import { ThemeToggle } from "./theme/theme-toggle";
 import { Button } from "./ui/button";
+
 import {
   Room,
   Amenity,
@@ -37,6 +39,29 @@ const PropertyLandingPage: React.FC<PropertyLandingPageProps> = ({
   const [visible, setVisible] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const minSwipeDistance = 50;
+  
+  // Gallery navigation functions
+  const openGallery = (index: number) => {
+    setCurrentImageIndex(index);
+    setGalleryOpen(true);
+  };
+
+  const goToNextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % galleryImages.length);
+  };
+
+  const goToPrevImage = () => {
+    setCurrentImageIndex((prevIndex) => 
+      (prevIndex - 1 + galleryImages.length) % galleryImages.length
+    );
+  };
+  
+
   // For back to top button visibility
   useEffect(() => {
     const toggleVisible = () => {
@@ -65,6 +90,38 @@ const PropertyLandingPage: React.FC<PropertyLandingPageProps> = ({
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+  
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+  
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      goToNextImage();
+    } else if (isRightSwipe) {
+      goToPrevImage();
+    }
+  };
+  
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowRight') {
+      goToNextImage();
+    } else if (e.key === 'ArrowLeft') {
+      goToPrevImage();
+    } else if (e.key === 'Escape') {
+      setGalleryOpen(false);
     }
   };
 
@@ -137,7 +194,7 @@ const PropertyLandingPage: React.FC<PropertyLandingPageProps> = ({
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden bg-white p-4 shadow-md">
+          <div className="md:hidden bg-white dark:bg-gray-900 p-4 shadow-md">
             <div className="flex flex-col space-y-3">
               <a
                 onClick={() => {
@@ -261,25 +318,118 @@ const PropertyLandingPage: React.FC<PropertyLandingPageProps> = ({
       </section>
 
       {/* Gallery Section */}
-      <section
-        id="gallery"
-        className="py-16 md:py-24 bg-gray-50 dark:bg-gray-700"
-      >
+      <section id="gallery" className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Gallery</h2>
-            <p className="text-gray-600 dark:text-gray-100 max-w-3xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               Take a visual tour of our beautiful property and rooms
             </p>
           </div>
-
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {galleryImages.map((image, index) => (
-              <GalleryImage key={image.slug || index} image={image} />
+              <div 
+                key={image.slug || index} 
+                className="relative overflow-hidden rounded-lg aspect-square group cursor-pointer"
+                onClick={() => openGallery(index)}
+              >
+                <Image 
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black opacity-20 md:opacity-0 md:group-hover:opacity-40 transition-opacity duration-300"></div>
+                
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <Button
+                            className="bg-white text-teal-600 hover:bg-gray-100"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              openGallery(index);
+                            }}
+                          >
+                            View Larger
+                            <Search className="ml-1 h-4 w-4" />
+                          </Button>
+                        </div>
+                        <div className="absolute bottom-3 right-3 md:hidden bg-white/80 text-teal-600 rounded-full p-2 z-20">
+                          <Search onClick={(e) => {
+                      e.stopPropagation();
+                      openGallery(index);
+                    }} className="h-4 w-4" />
+                        </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
+      
+      {/* Fullscreen Gallery Dialog */}
+      <Dialog open={galleryOpen} onOpenChange={setGalleryOpen}>
+        <DialogContent 
+          className="max-w-6xl w-[95vw] h-[90vh] p-0 overflow-hidden"
+          onKeyDown={handleKeyDown}
+        >
+          <div 
+            className="relative w-full h-full bg-black flex flex-col"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+          >
+            {/* Image Container */}
+            <div className="relative flex-grow flex items-center justify-center">
+              {galleryImages[currentImageIndex] && (
+                <Image
+                  src={galleryImages[currentImageIndex].src}
+                  alt={galleryImages[currentImageIndex].alt}
+                  fill
+                  sizes="95vw"
+                  priority
+                  className="object-contain"
+                />
+              )}
+            </div>
+
+            {/* Navigation Controls */}
+            {galleryImages.length > 1 && (
+              <div className="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="w-10 h-10 rounded-full bg-white/70 dark:bg-gray-800/70 text-gray-800 dark:text-gray-200 pointer-events-auto"
+                  onClick={goToPrevImage}
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </Button>
+                
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="w-10 h-10 rounded-full bg-white/70 dark:bg-gray-800/70 text-gray-800 dark:text-gray-200 pointer-events-auto"
+                  onClick={goToNextImage}
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </Button>
+              </div>
+            )}
+
+            {/* Caption & Counter */}
+            {galleryImages.length > 0 && (
+              <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4">
+                <p className="text-center">{galleryImages[currentImageIndex]?.alt}</p>
+                <p className="text-center text-sm opacity-70">
+                  {currentImageIndex + 1} / {galleryImages.length}
+                </p>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Testimonials */}
       <section className="py-16 md:py-24">
