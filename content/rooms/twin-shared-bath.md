@@ -14,7 +14,7 @@ images:
   - "/images/rooms/twin-shared-bath-1.jpg"
   - "/images/rooms/twin-shared-bath-2.jpg"
   - "/images/rooms/twin-shared-bath-3.jpg"
-order: 3
+order: 7
 url: "https://www.booking.com/hotel/ke/tradewinds-lodge.en-gb.html?lang=en-gb&soz=1&lang_changed=1&activeTab=main#RD317675003"
 ---
 

@@ -437,7 +437,9 @@ const PropertyLandingPage: React.FC<PropertyLandingPageProps> = ({
                 </span>
               </div>
               <p className="text-sm">
-              Located in Diani Beach in the Kwale region and Diani Beach reachable within 300 metres, Tradewinds Lodge provides accommodation.
+                Located in Diani Beach in the Kwale region and Diani Beach
+                reachable within 300 metres, Tradewinds Lodge provides
+                accommodation.
               </p>
             </div>
 
