@@ -10,7 +10,7 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
   return (
-    <Card className="bg-white transition-all duration-300 hover:shadow-md">
+    <Card className="bg-white dark:bg-gray-700 transition-all duration-300 hover:shadow-md">
       <CardContent className="p-6">
         <div className="flex text-amber-500 mb-4">
           {Array.from({ length: testimonial.rating }).map((_, i) => (
